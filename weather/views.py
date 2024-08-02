@@ -3,7 +3,7 @@ import requests
 import datetime
 
 def home(request):
-    API_KEY = open("C:\\Users\\User\\OneDrive\\Documents\\Weather\\API_KEY", "r").read().strip()
+    API_KEY = open("path to your API_KEY file", "r").read().strip()
     if request.method != "POST":
         return render(request, 'weather/home.html')
    
