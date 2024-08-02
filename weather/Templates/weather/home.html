@@ -1,0 +1,67 @@
+{% extends 'weather/base.html' %}
+
+{% block content %}
+    <form method ="POST">
+        {% csrf_token %}
+        <div class="search-container">
+                <div class="search-bar">
+                    <input type="text" class=" search-bar srch-input" id="city" name="city" placeholder="Enter city name" required>
+                </div>
+                <button type="submit" class="btn btn-primary  srch-btn">Get Weather</button>
+        </div><!-- /.container -->
+    </form>
+
+    {% if error %}
+        <p class="error">Error has occured: {{ error}}</p>
+    {% endif %}
+
+    {% if current_weather %}
+        <div class="weather-container">
+            <div class="weather-details">
+                <div class="first-info">
+                    <h4 class="cty-name"><strong>{{current_weather.city}}, {{ current_weather.country }}</strong></h4>               
+                    <div class="weather-icon-temp">
+                        <img src="http://openweathermap.org/img/wn/{{ current_weather.icon }}@2x.png" alt="Weather icon">
+                        <h1 class="temperature"><strong>{{ current_weather.temperature }}°C</strong></h1>
+                    </div><!--/.weather-icon -->
+                </div><!--/.first-info -->
+
+                <div class="time">
+                    <small class="time-date">{{ current_weather.description }} • {{ current_weather.day }}, {{ current_weather.now_time }}</small>  
+                </div><!--/.time -->
+                <div class="second-info">
+                    <small class="feelslike">Feels like {{ current_weather.feels_like }}°C</small>
+                    <small class="temp-range">Range: ( {{ current_weather.min_temp }}°C - {{ current_weather.max_temp }}°C )</small>
+                </div> <!--/.second-info -->
+
+                <div class="third-info">
+                    <div class="hdy" >Humidity: <p>{{ current_weather.humidity }}%<p></div>
+                    <div class="wsd">Wind Speed: <p> {{ current_weather.wind_speed }}m/s</p></div>
+                    <div class="pse">Pressure: <p>{{ current_weather.pressure }}hpa</p></div>
+                    <div class="ppt">Precipitation:<p>{{ current_weather.clouds}}%</p></div> 
+                </div> <!--/.third-info -->
+            </div> <!-- /.weather-details -->
+        </div> <!-- /.weather-container -->
+    {% endif %}
+    
+    <!--Forecasting 5 days weather-->
+    {% if forecast_weather %}
+    <h2><strong>5-day Forecast<strong></h2>
+        <div class="forecast-container">
+        {% for day in forecast_weather %}
+            <div class="forecast-item">
+                <div><strong>{{ day.day }} , ({{ day.date }})</strong></div>
+                <div class="weather-icon">
+                    <img src="http://openweathermap.org/img/wn/{{ day.icon }}@2x.png" alt="Weather icon">
+                    <div class="feelslike">Description: {{ day.description }}</div>
+                </div>
+                <div class="feelslike">Temperature: {{ day.temp }}°C</div>
+                <div class="temp-range">Range: {{ day.min_temp }}°C - {{ day.max_temp }}°C</div>
+            </div>
+        {% endfor %}
+        </div> <!-- /.forecast-container -->
+    {% endif %}
+
+
+{% endblock content %}
+    
