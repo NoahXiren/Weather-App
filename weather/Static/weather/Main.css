@@ -1,7 +1,9 @@
 body {
   color: #3eb489;
   background-color: #0e3a53;
-  height: 1050px;
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
 }
 
 h1 {
@@ -28,6 +30,8 @@ h1 {
   padding: 10px;
   font-size: 16px;
   font-weight: bold;
+  flex: 1;
+  border: none;
 }
 
 .srch-btn {
@@ -39,26 +43,21 @@ h1 {
   cursor: pointer;
 }
 
-/* Weather container */
 .weather-container {
   width: 700px;
-  margin-left: 200px;
-  margin-top: 50px;
-  display: flex;
-  align-items: flex-start;
+  margin: 50px auto;
   background-color: rgb(44, 47, 50);
   border: 3px solid black;
   border-radius: 25px;
-  margin-bottom: 20px;
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
 }
 
 .cty-name {
   padding-left: 10px;
 }
 
-/* Weather icon and temperature on the same line */
 .weather-icon-temp {
   display: flex;
   align-items: center;
@@ -72,13 +71,11 @@ h1 {
   font-size: 3em;
 }
 
-/* date and time*/
 .time .time-date {
   font-size: 20px;
   font-weight: bold;
 }
 
-/*second info*/
 .second-info,
 .feelslike,
 .temp-range {
@@ -90,13 +87,13 @@ h1 {
 .third-info {
   margin-top: 20px;
   padding: 20px;
-  width: 650px;
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/opacity/see-through */
+  background-color: rgba(0, 0, 0, 0.4);
   border: 3px rgba(0, 0, 0, 0.4);
   border-radius: 10px;
+  width: 650px;
 }
 
 .third-info .hdy,
@@ -108,21 +105,62 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 10px;
 }
 
 .third-info p {
   margin: 0;
-  padding: 5px 0; /* Adjust as needed for desired spacing */
+  padding: 5px 0;
 }
 
-/*forecast*/
 .forecast-container {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  background-color: #2f2e2e;
+  background-color: rgba(113, 111, 111, 0.4);
   border: 5px solid #000;
   border-radius: 10px;
   padding: 20px;
   color: #3eb489;
-  background-color: rgba(113, 111, 111, 0.4); 
+}
+
+.forecast-item {
+  flex: 1 1 calc(20% - 10px);
+  margin: 10px;
+  background-color: rgba(44, 47, 50, 0.8);
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .weather-container,
+  .third-info,
+  .forecast-container {
+    width: 100%;
+  }
+
+  .forecast-item {
+    flex: 1 1 calc(50% - 10px);
+  }
+}
+
+@media (max-width: 480px) {
+  .forecast-item {
+    flex: 1 1 100%;
+  }
+
+  .srch-btn {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .search-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-bar {
+    width: 100%;
+  }
 }
